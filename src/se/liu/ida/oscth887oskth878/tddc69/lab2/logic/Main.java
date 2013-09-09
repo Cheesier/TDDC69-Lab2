@@ -1,4 +1,4 @@
-package se.liu.ida.oscth887oskth878.tddc69.lab2;
+package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
 /**
  * Created with IntelliJ IDEA.
