@@ -1,6 +1,7 @@
 package se.liu.ida.oscth887oskth878.tddc69.lab2.render;
 
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.Board;
+import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardBuilder;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,6 +13,9 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.Board;
 public class BoardTest {
     public static void main(String[] args) {
         Board board = new Board();
-        System.out.println(TetrisTextView.convertToText(board));
+        for (int i = 0; i < 10; i++) {
+            BoardBuilder.randomizeBoard(board);
+            System.out.println(TetrisTextView.convertToText(board));
+        }
     }
 }

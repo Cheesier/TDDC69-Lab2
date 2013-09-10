@@ -18,9 +18,9 @@ public class Board {
     }
 
     public Board(int WIDTH, int HEIGHT) {
-        int frameSize = 1;
-        this.WIDTH = WIDTH + frameSize * 2; // add the extra blocks to each side
-        this.HEIGHT = HEIGHT + frameSize * 2;
+        int boarderWidth = 1;
+        this.WIDTH = WIDTH + boarderWidth * 2; // add the extra blocks to each side
+        this.HEIGHT = HEIGHT + boarderWidth * 2;
         this.grid = new SquareType[this.WIDTH][this.HEIGHT];
 
         initBoard();
@@ -46,7 +46,18 @@ public class Board {
         }
     }
 
-    public SquareType getSquareType(int x, int y) {
-        return grid[x][y];
+    public SquareType.Shape getSquareTypeShape(int x, int y) {
+        return grid[x][y].getShape();
+    }
+
+    void setSquareType(int x, int y, SquareType.Shape shape) {
+        if (shape == SquareType.Shape.FRAME)
+            throw new IllegalArgumentException("You are not allowed to place walls."); // lack of custom exception
+
+        if (getSquareTypeShape(x, y) == SquareType.Shape.FRAME)
+            throw new IllegalArgumentException("You are not allowed to replace walls.");
+
+
+        grid[x][y].setShape(shape);
     }
 }

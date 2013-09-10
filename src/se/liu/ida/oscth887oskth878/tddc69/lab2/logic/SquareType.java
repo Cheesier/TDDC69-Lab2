@@ -10,7 +10,7 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
 public class SquareType {
     public enum Shape {
-        EMPTY, I, O, T, S, Z, J, L, FRAME
+        I, O, T, S, Z, J, L, EMPTY, FRAME
     }
 
     private Shape shape;
@@ -21,5 +21,9 @@ public class SquareType {
 
     public Shape getShape() {
         return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
     }
 }

@@ -15,7 +15,7 @@ public class TetrisTextView {
 
         for (int y = 0; y < board.HEIGHT; y++) {
             for (int x = 0; x < board.WIDTH; x++) {
-                result.append(getRepresentation(board.getSquareType(x, y).getShape()));
+                result.append(getRepresentation(board.getSquareTypeShape(x, y)));
             }
             result.append("\n");
         }
