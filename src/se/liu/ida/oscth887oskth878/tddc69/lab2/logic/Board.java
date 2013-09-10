@@ -12,6 +12,8 @@ import java.util.Arrays;
 public class Board {
     public final int WIDTH, HEIGHT;
     private SquareType[][] grid;
+    private Poly fallingPoly = null;
+    private int fallingX, fallingY;
 
     public Board() {
         this(10, 20);

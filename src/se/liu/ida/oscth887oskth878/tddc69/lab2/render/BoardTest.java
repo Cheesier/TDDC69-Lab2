@@ -2,6 +2,7 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.render;
 
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.Board;
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardBuilder;
+import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.TetrominoMaker;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,9 +14,10 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardBuilder;
 public class BoardTest {
     public static void main(String[] args) {
         Board board = new Board();
-        for (int i = 0; i < 10; i++) {
-            BoardBuilder.randomizeBoard(board);
-            System.out.println(TetrisTextView.convertToText(board));
-        }
+
+        System.out.println(TetrisTextView.convertToText(board));
+
+        TetrominoMaker maker = new TetrominoMaker();
+        maker.loadBlueprints();
     }
 }

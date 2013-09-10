@@ -8,4 +8,19 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
  * To change this template use File | Settings | File Templates.
  */
 public class Poly {
+    private SquareType[][] squares;
+    private SquareType.Shape shape;
+
+    public Poly(SquareType[][] squares) {
+        this.squares = squares;
+    }
+
+    public void rotate(boolean clockwise) {
+        if (clockwise) {
+            //rotate it clockwise
+        }
+        else {
+            // rotate it ccw
+        }
+    }
 }
