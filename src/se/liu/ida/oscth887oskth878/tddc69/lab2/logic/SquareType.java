@@ -8,11 +8,11 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
  * To change this template use File | Settings | File Templates.
  */
 
-enum Shape {
-    EMPTY, I, O, T, S, Z, J, L, OUTSIDE
-}
-
 public class SquareType {
+    public enum Shape {
+        EMPTY, I, O, T, S, Z, J, L, FRAME
+    }
+
     private Shape shape;
 
     public SquareType(Shape shape) {
