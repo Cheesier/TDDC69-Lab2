@@ -10,7 +10,7 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class TetrominoBlueprints {
-    static String[][] blueprints = new String[][] {
+    public static String[][] blueprints = new String[][] {
 
             {"I", "#\n" +
                   "#\n" +

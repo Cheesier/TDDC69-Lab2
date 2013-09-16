@@ -12,6 +12,7 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.math.Vec2;
 public class Poly {
     private SquareType[][] squares;
     private SquareType.Shape shape;
+    private Vec2 dimension;
 
     public Poly(String shape, String pattern) {
         this.shape = SquareType.Shape.valueOf(shape);
@@ -23,18 +24,34 @@ public class Poly {
         return shape;
     }
 
+    public SquareType getSquare(int x, int y) {
+        return squares[x][y];
+    }
+
+    public Vec2 getDimension() {
+        return dimension;
+    }
+
     public void rotate(boolean clockwise) {
+        SquareType[][] newSquares = new SquareType[dimension.y][dimension.x];
+
         if (clockwise) {
-            //rotate it clockwise
+            for (int x = 0; x < dimension.x; x++) {
+                for (int y = 0; y < dimension.y; y++) {
+
+                }
+            }
         }
         else {
             // rotate it ccw
         }
+        dimension = new Vec2(dimension.y, dimension.x);
     }
 
     private void parsePoly(String pattern) {
         Vec2 dim = getDimensions(pattern);
         squares = new SquareType[dim.x][dim.y];
+        dimension = dim;
 
         int x = 0, y = 0;
 

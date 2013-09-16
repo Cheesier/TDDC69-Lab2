@@ -2,6 +2,7 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.render;
 
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.Board;
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardBuilder;
+import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.TetrominoBlueprints;
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.TetrominoMaker;
 
 /**
@@ -15,9 +16,17 @@ public class BoardTest {
     public static void main(String[] args) {
         Board board = new Board();
 
-        System.out.println(TetrisTextView.convertToText(board));
+        TetrisFrame window = new TetrisFrame(board);
 
-        TetrominoMaker maker = new TetrominoMaker();
-        maker.loadBlueprints();
+        try {
+            while (true) {
+                board.tick();
+                window.draw(board);
+                Thread.sleep(300l);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }
 }

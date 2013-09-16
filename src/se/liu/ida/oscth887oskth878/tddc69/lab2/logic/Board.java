@@ -1,5 +1,7 @@
 package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
+import se.liu.ida.oscth887oskth878.tddc69.lab2.math.Vec2;
+
 import java.util.Arrays;
 
 /**
@@ -14,6 +16,8 @@ public class Board {
     private SquareType[][] grid;
     private Poly fallingPoly = null;
     private int fallingX, fallingY;
+    private Vec2 fallingPolyPos = new Vec2();
+    private TetrominoMaker tetroMaker = new TetrominoMaker(TetrominoBlueprints.blueprints);
 
     public Board() {
         this(10, 20);
@@ -26,6 +30,15 @@ public class Board {
         this.grid = new SquareType[this.WIDTH][this.HEIGHT];
 
         initBoard();
+        System.out.println("Created a new board: " + this.WIDTH + ", " + this.HEIGHT);
+    }
+
+    public void tick() {
+        updatePolyPos();
+    }
+
+    private void updatePolyPos() {
+        this.fallingPolyPos.y--;
     }
 
     private void initBoard() {
@@ -46,6 +59,22 @@ public class Board {
                 }
             }
         }
+
+        newFallingPoly();
+    }
+
+    private void newFallingPoly() {
+        fallingPoly = tetroMaker.getPoly(0);
+        fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
+        fallingPolyPos.y = this.HEIGHT-1;
+    }
+
+    public Poly getFallingPoly() {
+        return fallingPoly;
+    }
+
+    public Vec2 getFallingPolyPos() {
+        return fallingPolyPos;
     }
 
     public SquareType.Shape getSquareTypeShape(int x, int y) {
