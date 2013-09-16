@@ -4,6 +4,7 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.Board;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,16 +15,27 @@ import java.awt.*;
  */
 public class TetrisFrame extends JFrame {
     JTextArea area;
+    JMenuBar menuBar = new JMenuBar();
+    JMenu spelMenu = new JMenu("Spel");
 
     public TetrisFrame(Board board) {
         super("Tetris game!");
+
+        JMenuItem exit = new JMenuItem("Avsluta", 'A');
+        spelMenu.add(exit);
+        this.add(spelMenu);
+        spelMenu.setVisible(true);
+        exit.addActionListener(killProgramAction);
+
+        menuBar.add(spelMenu);
+        this.setJMenuBar(menuBar);
 
         area = new JTextArea(board.HEIGHT+1, board.WIDTH);
         area.setEditable(false);
         area.setFont(new Font("Monospaced", Font.PLAIN, 16));
         this.add(area);
 
-        this.setSize(area.getPreferredSize());
+        this.pack();
         this.setVisible(true);
         this.setResizable(false);
     }
@@ -31,4 +43,12 @@ public class TetrisFrame extends JFrame {
     public void draw(Board board) {
         area.setText(TetrisTextView.convertToText(board));
     }
+
+    Action killProgramAction = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Closing program.");
+            System.exit(0);
+        }
+    };
 }

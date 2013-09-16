@@ -5,6 +5,9 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardBuilder;
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.TetrominoBlueprints;
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.TetrominoMaker;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+
 /**
  * Created with IntelliJ IDEA.
  * User: ostenip
@@ -13,20 +16,25 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.TetrominoMaker;
  * To change this template use File | Settings | File Templates.
  */
 public class BoardTest {
-    public static void main(String[] args) {
-        Board board = new Board();
+    static Board board;
+    static TetrisFrame window;
 
-        TetrisFrame window = new TetrisFrame(board);
-
-        try {
-            while (true) {
-                board.tick();
-                window.draw(board);
-                Thread.sleep(300l);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+    static final Action doOneStep = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            board.tick();
+            window.draw(board);
         }
+    };
+
+    public static void main(String[] args) {
+        board = new Board();
+
+        window = new TetrisFrame(board);
+
+        final Timer clockTimer = new Timer(500, doOneStep);
+        clockTimer.setCoalesce(true);
+        clockTimer.start();
 
     }
 }
