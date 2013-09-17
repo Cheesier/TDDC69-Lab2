@@ -11,6 +11,7 @@ import java.util.Random;
  */
 public class TetrominoMaker {
     private Poly[] polies;
+    private Random rand = new Random();
 
     public TetrominoMaker(String[][] blueprints) {
         polies = new Poly[blueprints.length];
@@ -27,7 +28,6 @@ public class TetrominoMaker {
     }
 
     public Poly getRandomPoly() {
-        Random rand = new Random();
         return polies[rand.nextInt(polies.length)];
     }
 
