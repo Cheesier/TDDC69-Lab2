@@ -35,14 +35,17 @@ public class TetrisComponent extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        renderSquareAt(11,0, SquareType.Shape.O, g2);
 
-
+        for (int x = 0; x < 12; x++)
+            for (int y = 0; y < 22; y++) {
+                renderSquareAt(x,y, SquareType.Shape.L, g2);
+            }
     }
 
     private void renderSquareAt(int x, int y, SquareType.Shape shape, Graphics2D g2) {
+        int inY = (board.HEIGHT - y-1);
         Shape box = new Rectangle(SQUARE_SIZE * x + MARGIN*(2*x+1),
-                                  SQUARE_SIZE * (board.HEIGHT - y) + MARGIN*(2*y+1), // Något knas med marginalen
+                                  SQUARE_SIZE * inY + MARGIN*(2*inY+1),
                                   SQUARE_SIZE,
                                   SQUARE_SIZE);
         g2.setColor(colorMapper(shape));
