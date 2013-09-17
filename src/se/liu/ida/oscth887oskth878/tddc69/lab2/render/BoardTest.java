@@ -22,7 +22,7 @@ public class BoardTest {
     static final Action doOneStep = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            board.tick();
+            //board.tick();
             window.draw(board);
         }
     };
@@ -32,7 +32,7 @@ public class BoardTest {
 
         window = new TetrisFrame(board);
 
-        final Timer clockTimer = new Timer(500, doOneStep);
+        final Timer clockTimer = new Timer(100, doOneStep);
         clockTimer.setCoalesce(true);
         clockTimer.start();
 

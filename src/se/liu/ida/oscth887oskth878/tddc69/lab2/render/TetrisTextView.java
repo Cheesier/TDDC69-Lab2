@@ -25,11 +25,15 @@ public class TetrisTextView {
         }
 
         for (int y = 0; y < fallingPoly.getDimension().y; y++) {
-            int index = getIndexFor(board, fallingPolyPos.x, fallingPolyPos.y + y);
+            for (int x = 0; x < fallingPoly.getDimension().x; x++) {
+                int index = getIndexFor(board, fallingPolyPos.x + x, fallingPolyPos.y +fallingPoly.getDimension().y - y);
+                if (fallingPoly.getSquare(x, y) == null)
+                    continue;
 
-            if (index > 0 && index < getIndexFor(board, board.WIDTH, 0))
-                if (result.charAt(index) != getRepresentation(SquareType.Shape.FRAME))
-                    result.setCharAt(index, getRepresentation(fallingPoly.getShape()));
+                if (index > 0 && index < getIndexFor(board, board.WIDTH, 0))
+                    if (result.charAt(index) != getRepresentation(SquareType.Shape.FRAME))
+                        result.setCharAt(index, getRepresentation(fallingPoly.getShape()));
+            }
         }
 
 
@@ -38,7 +42,7 @@ public class TetrisTextView {
 
     private static int getIndexFor(Board board, int x, int y) {
         int origin = board.WIDTH * board.HEIGHT + board.HEIGHT - board.WIDTH-1;
-        return origin - board.WIDTH*y-y+x;
+        return origin - board.WIDTH*y - y+x;
     }
 
     private static char getRepresentation(SquareType.Shape shape) {

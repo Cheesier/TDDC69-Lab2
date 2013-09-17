@@ -64,9 +64,9 @@ public class Board {
     }
 
     private void newFallingPoly() {
-        fallingPoly = tetroMaker.getPoly(0);
+        fallingPoly = tetroMaker.getPoly(5);
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
-        fallingPolyPos.y = this.HEIGHT-1;
+        fallingPolyPos.y = this.HEIGHT-10;
     }
 
     public Poly getFallingPoly() {
