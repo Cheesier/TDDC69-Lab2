@@ -16,23 +16,23 @@ import java.awt.event.ActionEvent;
 public class TetrisFrame extends JFrame {
     JTextArea area;
     JMenuBar menuBar = new JMenuBar();
-    JMenu spelMenu = new JMenu("Spel");
+    JMenu gameMenu = new JMenu("Spel");
 
     public TetrisFrame(Board board) {
         super("Tetris game!");
 
         JMenuItem exit = new JMenuItem("Avsluta", 'A');
-        spelMenu.add(exit);
-        this.add(spelMenu);
-        spelMenu.setVisible(true);
+        gameMenu.add(exit);
+        this.add(gameMenu);
+        gameMenu.setVisible(true);
         exit.addActionListener(killProgramAction);
 
-        menuBar.add(spelMenu);
+        menuBar.add(gameMenu);
         this.setJMenuBar(menuBar);
 
         area = new JTextArea(board.HEIGHT+1, board.WIDTH);
         area.setEditable(false);
-        area.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        area.setFont(new Font("Monospaced", Font.PLAIN, 20));
         this.add(area);
 
         this.pack();

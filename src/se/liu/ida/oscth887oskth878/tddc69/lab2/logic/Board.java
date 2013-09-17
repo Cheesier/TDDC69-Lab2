@@ -34,7 +34,8 @@ public class Board {
     }
 
     public void tick() {
-        updatePolyPos();
+        //updatePolyPos();
+        fallingPoly.rotate(true);
     }
 
     private void updatePolyPos() {
@@ -64,7 +65,7 @@ public class Board {
     }
 
     private void newFallingPoly() {
-        fallingPoly = tetroMaker.getPoly(5);
+        fallingPoly = tetroMaker.getPoly(6);
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
         fallingPolyPos.y = this.HEIGHT-10;
     }

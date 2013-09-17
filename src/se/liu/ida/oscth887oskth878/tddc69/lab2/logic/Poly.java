@@ -36,15 +36,21 @@ public class Poly {
         SquareType[][] newSquares = new SquareType[dimension.y][dimension.x];
 
         if (clockwise) {
-            for (int x = 0; x < dimension.x; x++) {
-                for (int y = 0; y < dimension.y; y++) {
+            for (int y = 0; y < dimension.y; y++) {
+                for (int x = 0; x < dimension.x ; x++) {
+                    newSquares[y][x] = this.squares[x][dimension.y - y - 1];
 
                 }
             }
         }
         else {
-            // rotate it ccw
+            for (int x = 0; x < dimension.x; x++) {
+                for (int y = 0; y < dimension.y ; y++) {
+                    newSquares[y][x] = this.squares[dimension.x - x - 1][y];
+                }
+            }
         }
+        this.squares = newSquares;
         dimension = new Vec2(dimension.y, dimension.x);
     }
 
