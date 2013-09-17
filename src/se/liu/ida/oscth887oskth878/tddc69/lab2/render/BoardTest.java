@@ -17,20 +17,20 @@ import java.awt.event.ActionEvent;
  */
 public class BoardTest {
     static Board board;
-    static TetrisFrame window;
+    static TetrisGraphicFrame window;
 
     static final Action doOneStep = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
             board.tick();
-            window.draw(board);
+            //window.draw(board);
         }
     };
 
     public static void main(String[] args) {
         board = new Board();
 
-        window = new TetrisFrame(board);
+        window = new TetrisGraphicFrame(board);
 
         final Timer clockTimer = new Timer(1000, doOneStep);
         clockTimer.setCoalesce(true);
