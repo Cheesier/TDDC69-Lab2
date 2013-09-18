@@ -92,14 +92,14 @@ public class TetrisComponent extends JComponent {
     }
 
     public void moveLeft() {
-        board.moveLeft();
+        board.move(-1);
     }
 
     public void moveRight() {
-        board.moveRight();
+        board.move(1);
     }
 
     public void rotate() {
-        board.getFallingPoly().rotate(true);
+        board.rotate(true);
     }
 }

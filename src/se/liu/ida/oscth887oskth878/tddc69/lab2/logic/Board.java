@@ -41,7 +41,6 @@ public class Board {
             return;
 
         updatePolyPos();
-        //fallingPoly.rotate(true);
         notifyListners();
     }
 
@@ -80,6 +79,23 @@ public class Board {
             }
         }
         return true;
+    }
+
+    private boolean isValidPlacement() {
+        for (int x = 0; x < fallingPoly.getDimension().x; x++) {
+            for (int y = 0; y < fallingPoly.getDimension().y; y++) {
+                if (fallingPoly.getSquare(x, y) != null) {
+                    SquareType.Shape shape = getSquareTypeShape(getFallingPolyPos().x + x,
+                                                                getFallingPolyPos().y + y);
+                    if (shape != SquareType.Shape.EMPTY && shape != SquareType.Shape.FRAME_NO_COLLIDE) {
+                        System.out.println(shape.toString());
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+
     }
 
     private void initBoard() {
@@ -150,4 +166,19 @@ public class Board {
         for (int i = 0; i < boardListeners.size(); i++)
             boardListeners.get(i).boardChanged();
     }
+
+    public void move(int anmount) {
+        fallingPolyPos.x += anmount;
+        if (!isValidPlacement())
+            fallingPolyPos.x -= anmount;
+        notifyListners();
+    }
+
+    public void rotate (boolean clocwise) {
+        fallingPoly.rotate(true);
+        if (!isValidPlacement())
+            fallingPoly.rotate(false);
+        notifyListners();
+    }
+
 }
