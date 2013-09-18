@@ -10,7 +10,7 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
 public class SquareType {
     public enum Shape {
-        I, O, T, S, Z, J, L, EMPTY, FRAME
+        I, O, T, S, Z, J, L, EMPTY, FRAME, FRAME_NO_COLLIDE
     }
 
     private Shape shape;

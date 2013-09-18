@@ -50,6 +50,9 @@ public class TetrisComponent extends JComponent {
     }
 
     private void renderSquareAt(int x, int y, SquareType.Shape shape, Graphics2D g2) {
+        if (x > board.WIDTH || x < 0 || y > board.HEIGHT || y < 0)
+            return;
+
         int inY = (board.HEIGHT - y-1);
         Shape box = new Rectangle(SQUARE_SIZE * x + MARGIN*(2*x+1),
                                   SQUARE_SIZE * inY + MARGIN*(2*inY+1),
@@ -80,6 +83,7 @@ public class TetrisComponent extends JComponent {
             case EMPTY:
                 return Color.WHITE;
             case FRAME:
+            case FRAME_NO_COLLIDE:
                 return Color.DARK_GRAY;
             default:
                 return Color.PINK;

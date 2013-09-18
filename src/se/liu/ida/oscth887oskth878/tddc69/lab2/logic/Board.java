@@ -20,6 +20,7 @@ public class Board {
     private Vec2 fallingPolyPos = new Vec2();
     private TetrominoMaker tetroMaker = new TetrominoMaker(TetrominoBlueprints.blueprints);
     private ArrayList<BoardListener> boardListeners = new ArrayList<BoardListener>();
+    private boolean gameOver = false;
 
     public Board() {
         this(10, 20);
@@ -36,7 +37,11 @@ public class Board {
     }
 
     public void tick() {
+        if (gameOver)
+            return;
+
         updatePolyPos();
+        //fallingPoly.rotate(true);
         notifyListners();
     }
 
@@ -65,9 +70,10 @@ public class Board {
         for (int x = 0; x < fallingPoly.getDimension().x; x++) {
             for (int y = 0; y < fallingPoly.getDimension().y; y++) {
                 if (fallingPoly.getSquare(x, y) != null) {
-                    if (getSquareTypeShape(getFallingPolyPos().x + x,
-                                           getFallingPolyPos().y + y - 1)
-                        != SquareType.Shape.EMPTY) {
+                    SquareType.Shape shape = getSquareTypeShape(getFallingPolyPos().x + x,
+                                                                getFallingPolyPos().y + y - 1);
+                    if (shape != SquareType.Shape.EMPTY && shape != SquareType.Shape.FRAME_NO_COLLIDE) {
+                        System.out.println(shape.toString());
                         return false;
                     }
                 }
@@ -87,7 +93,10 @@ public class Board {
             for (int y = 0; y < this.HEIGHT; y++) {
                 // check if outer most block
                 if ((x == 0 || y == 0) || (x == this.WIDTH-1 || y == this.HEIGHT-1)) {
-                    grid[x][y] = new SquareType(SquareType.Shape.FRAME);
+                    if (y == this.HEIGHT-1)
+                        grid[x][y] = new SquareType(SquareType.Shape.FRAME_NO_COLLIDE);
+                    else
+                        grid[x][y] = new SquareType(SquareType.Shape.FRAME);
                 }
                 else {
                     grid[x][y] = new SquareType(SquareType.Shape.EMPTY);
@@ -99,9 +108,14 @@ public class Board {
     }
 
     private void newFallingPoly() {
-        fallingPoly = tetroMaker.getRandomPoly();
+        fallingPoly = tetroMaker.getPoly(0);
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
-        fallingPolyPos.y = this.HEIGHT-fallingPoly.getDimension().y -1;
+        fallingPolyPos.y = this.HEIGHT-fallingPoly.getDimension().y;
+
+        if (!canFall()) {
+            this.gameOver = true;
+            System.out.println("Game over");
+        }
 
         notifyListners();
     }
