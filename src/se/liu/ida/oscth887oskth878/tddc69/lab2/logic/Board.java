@@ -54,38 +54,6 @@ public class Board {
         }
     }
 
-    private void clearLinesOld() {
-        //int[] lines = new int[fallingPoly.getDimension().y];
-        int lines = 0;
-        for (int y = 0; y < fallingPoly.getDimension().y; y++) {
-            for (int x = 0; x < this.WIDTH; x++) {
-                if (getSquareTypeShape(x, getFallingPolyPos().y + y) == SquareType.Shape.EMPTY)
-                    break;
-                if (x == this.WIDTH - 1) {
-                    //lines[y] = y + getFallingPolyPos().y;
-                    lines++;
-                    for (int x2 = 1; x2 < this.WIDTH - 1; x2++) {
-                        setSquareType(x2, getFallingPolyPos().y + y, SquareType.Shape.EMPTY);
-                    }
-                }
-            }
-        }
-        if (lines > 0) {
-            for (int y = 0; y < fallingPoly.getDimension().y; y++) {
-                for (int x = 1; x < (this.WIDTH - 1); x++) {
-                    if (getSquareTypeShape(x, getFallingPolyPos().y + y) != SquareType.Shape.EMPTY) {
-                        for (int x2 = 1; x2 < (this.WIDTH -1); x2++) {
-                            SquareType.Shape temp = getSquareTypeShape(x2, y + fallingPolyPos.y);
-                            setSquareType(x2, y + fallingPolyPos.y, getSquareTypeShape(x2, y + fallingPolyPos.y - lines));
-                            setSquareType(x2, y + fallingPolyPos.y - lines, temp);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private void clearLines() {
         for (int y = fallingPolyPos.y; y < fallingPolyPos.y + fallingPoly.getDimension().y; y++) {
             if (isLineFull(y)) {
@@ -171,12 +139,6 @@ public class Board {
     }
 
     private void initBoard() {
-        /*
-        for (SquareType[] squareTypes : grid) {
-            Arrays.fill(squareTypes, new SquareType(SquareType.Shape.EMPTY));
-        }
-        */
-
         for (int x = 0; x < this.WIDTH; x++) {
             for (int y = 0; y < this.HEIGHT; y++) {
                 // check if outer most block
@@ -196,7 +158,7 @@ public class Board {
     }
 
     private void newFallingPoly() {
-        fallingPoly = tetroMaker.getPoly(0);
+        fallingPoly = tetroMaker.getRandomPoly();
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
         fallingPolyPos.y = this.HEIGHT-1;
 
