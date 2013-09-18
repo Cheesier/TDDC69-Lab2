@@ -36,10 +36,17 @@ public class TetrisComponent extends JComponent {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        for (int x = 0; x < 12; x++)
-            for (int y = 0; y < 22; y++) {
-                renderSquareAt(x,y, SquareType.Shape.L, g2);
+        for (int x = 0; x < board.WIDTH; x++) {
+            for (int y = 0; y < board.HEIGHT; y++) {
+                renderSquareAt(x, y, board.getSquareTypeShape(x, y), g2);
             }
+        }
+        for (int x = 0; x < board.getFallingPoly().getDimension().x; x++) {
+            for (int y = 0; y < board.getFallingPoly().getDimension().y; y++) {
+                if (board.getFallingPoly().getSquare(x,y) != null)
+                    renderSquareAt(x + board.getFallingPolyPos().x, y + board.getFallingPolyPos().y, board.getFallingPoly().getShape(), g2);
+            }
+        }
     }
 
     private void renderSquareAt(int x, int y, SquareType.Shape shape, Graphics2D g2) {

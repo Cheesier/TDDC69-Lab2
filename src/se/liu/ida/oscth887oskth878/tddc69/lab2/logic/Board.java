@@ -2,6 +2,7 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
 import se.liu.ida.oscth887oskth878.tddc69.lab2.math.Vec2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -18,6 +19,7 @@ public class Board {
     private int fallingX, fallingY;
     private Vec2 fallingPolyPos = new Vec2();
     private TetrominoMaker tetroMaker = new TetrominoMaker(TetrominoBlueprints.blueprints);
+    private ArrayList<BoardListener> boardListeners = new ArrayList<BoardListener>();
 
     public Board() {
         this(10, 20);
@@ -34,12 +36,44 @@ public class Board {
     }
 
     public void tick() {
-        //updatePolyPos();
-        fallingPoly.rotate(true);
+        updatePolyPos();
+        notifyListners();
     }
 
     private void updatePolyPos() {
-        this.fallingPolyPos.y--;
+        if (canFall())
+            this.fallingPolyPos.y--;
+        else {
+            placePoly();
+            newFallingPoly();
+        }
+    }
+
+    private void placePoly() {
+        for (int x = 0; x < fallingPoly.getDimension().x; x++) {
+            for (int y = 0; y < fallingPoly.getDimension().y; y++) {
+                if (fallingPoly.getSquare(x, y) != null) {
+                    setSquareType(getFallingPolyPos().x + x,
+                                  getFallingPolyPos().y + y,
+                                  fallingPoly.getShape());
+                }
+            }
+        }
+    }
+
+    private boolean canFall() {
+        for (int x = 0; x < fallingPoly.getDimension().x; x++) {
+            for (int y = 0; y < fallingPoly.getDimension().y; y++) {
+                if (fallingPoly.getSquare(x, y) != null) {
+                    if (getSquareTypeShape(getFallingPolyPos().x + x,
+                                           getFallingPolyPos().y + y - 1)
+                        != SquareType.Shape.EMPTY) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private void initBoard() {
@@ -65,9 +99,11 @@ public class Board {
     }
 
     private void newFallingPoly() {
-        fallingPoly = tetroMaker.getPoly(6);
+        fallingPoly = tetroMaker.getRandomPoly();
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
-        fallingPolyPos.y = this.HEIGHT-10;
+        fallingPolyPos.y = this.HEIGHT-fallingPoly.getDimension().y -1;
+
+        notifyListners();
     }
 
     public Poly getFallingPoly() {
@@ -89,7 +125,15 @@ public class Board {
         if (getSquareTypeShape(x, y) == SquareType.Shape.FRAME)
             throw new IllegalArgumentException("You are not allowed to replace walls.");
 
-
         grid[x][y].setShape(shape);
+    }
+
+    public void addBoardListener(BoardListener bl) {
+        boardListeners.add(bl);
+    }
+
+    private void notifyListners() {
+        for (int i = 0; i < boardListeners.size(); i++)
+            boardListeners.get(i).boardChanged();
     }
 }

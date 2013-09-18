@@ -29,10 +29,10 @@ public class BoardTest {
 
     public static void main(String[] args) {
         board = new Board();
-
         window = new TetrisGraphicFrame(board);
+        board.addBoardListener(window);
 
-        final Timer clockTimer = new Timer(1000, doOneStep);
+        final Timer clockTimer = new Timer(300, doOneStep);
         clockTimer.setCoalesce(true);
         clockTimer.start();
 

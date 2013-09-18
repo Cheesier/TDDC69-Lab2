@@ -1,6 +1,7 @@
 package se.liu.ida.oscth887oskth878.tddc69.lab2.render;
 
 import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.Board;
+import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +13,9 @@ import java.awt.*;
  * Time: 20:38
  * To change this template use File | Settings | File Templates.
  */
-public class TetrisGraphicFrame extends JFrame {
+public class TetrisGraphicFrame extends JFrame implements BoardListener{
     private TetrisComponent tetrisComponent;
+
 
     public TetrisGraphicFrame(Board board) throws HeadlessException {
         super("TETRIS");
@@ -24,5 +26,11 @@ public class TetrisGraphicFrame extends JFrame {
         this.pack();
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    }
+
+    @Override
+    public void boardChanged() {
+        repaint();
     }
 }
