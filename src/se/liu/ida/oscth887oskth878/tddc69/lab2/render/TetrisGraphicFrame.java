@@ -29,16 +29,34 @@ public class TetrisGraphicFrame extends JFrame implements BoardListener{
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("UP"),
-                "rotate");
-        tetrisComponent.getActionMap().put("rotate",
+                "rotateCC");
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("W"),
+                "rotateCC");
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("X"),
+                "rotateCC");
+        tetrisComponent.getActionMap().put("rotateCC",
                 new AbstractAction() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        tetrisComponent.rotate();
+                        tetrisComponent.rotate(true);
                     }
                 });
 
+
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("Z"),
+                "rotateCCW");
+        tetrisComponent.getActionMap().put("rotateCCW",
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        tetrisComponent.rotate(false);
+                    }
+                });
+
+
         tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),
+                "moveLeft");
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("A"),
                 "moveLeft");
         tetrisComponent.getActionMap().put("moveLeft",
                 new AbstractAction() {
@@ -50,6 +68,8 @@ public class TetrisGraphicFrame extends JFrame implements BoardListener{
 
         tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"),
                 "moveRight");
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("D"),
+                "moveRight");
         tetrisComponent.getActionMap().put("moveRight",
                 new AbstractAction() {
                     @Override
@@ -59,6 +79,8 @@ public class TetrisGraphicFrame extends JFrame implements BoardListener{
                 });
 
         tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("DOWN"),
+                "moveDown");
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("S"),
                 "moveDown");
         tetrisComponent.getActionMap().put("moveDown",
                 new AbstractAction() {

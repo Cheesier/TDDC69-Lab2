@@ -99,8 +99,8 @@ public class TetrisComponent extends JComponent {
         board.move(1);
     }
 
-    public void rotate() {
-        board.rotate(true);
+    public void rotate(boolean clockwise) {
+        board.rotate(clockwise);
     }
 
     public void moveDown() {
