@@ -32,7 +32,7 @@ public class BoardTest {
         window = new TetrisGraphicFrame(board);
         board.addBoardListener(window);
 
-        final Timer clockTimer = new Timer(300, doOneStep);
+        final Timer clockTimer = new Timer(200, doOneStep);
         clockTimer.setCoalesce(true);
         clockTimer.start();
 

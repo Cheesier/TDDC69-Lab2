@@ -49,8 +49,26 @@ public class Board {
             this.fallingPolyPos.y--;
         else {
             placePoly();
+            clearLines();
             newFallingPoly();
         }
+    }
+
+    private void clearLines() {
+        int[] lines = new int[fallingPoly.getDimension().y];
+        for (int y = 0; y < fallingPoly.getDimension().y; y++) {
+            for (int x = 0; x < this.WIDTH; x++) {
+                if (getSquareTypeShape(x, getFallingPolyPos().y + y) == SquareType.Shape.EMPTY)
+                    break;
+                if (x == this.WIDTH - 1) {
+                    lines[y] = y + getFallingPolyPos().y;
+                    for (int i = 1; i < this.WIDTH - 1; i++) {
+                        setSquareType(i, getFallingPolyPos().y + y, SquareType.Shape.EMPTY);
+                    }
+                }
+            }
+        }
+
     }
 
     private void placePoly() {
