@@ -57,6 +57,16 @@ public class TetrisGraphicFrame extends JFrame implements BoardListener{
                         tetrisComponent.moveRight();
                     }
                 });
+
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("DOWN"),
+                "moveDown");
+        tetrisComponent.getActionMap().put("moveDown",
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        tetrisComponent.moveDown();
+                    }
+                });
     }
 
     @Override
