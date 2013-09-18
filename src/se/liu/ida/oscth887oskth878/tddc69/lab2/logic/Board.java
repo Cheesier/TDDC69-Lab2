@@ -54,7 +54,7 @@ public class Board {
         }
     }
 
-    private void clearLines() {
+    private void clearLinesOld() {
         //int[] lines = new int[fallingPoly.getDimension().y];
         int lines = 0;
         for (int y = 0; y < fallingPoly.getDimension().y; y++) {
@@ -86,6 +86,47 @@ public class Board {
         }
     }
 
+    private void clearLines() {
+        for (int y = fallingPolyPos.y; y < fallingPolyPos.y + fallingPoly.getDimension().y; y++) {
+            if (isLineFull(y)) {
+                for (int y2 = y; y2 < this.HEIGHT-2; y2++) {
+                    dropLine(y2+1, 1);
+                }
+                y--;
+            }
+        }
+    }
+
+    private boolean isLineEmpty(int y) {
+        for (int x = 1; x < WIDTH-1; x++)
+            if (getSquareTypeShape(x, y) != SquareType.Shape.EMPTY)
+                return true;
+        return false;
+    }
+
+    private boolean isLineFull(int y) {
+        for (int x = 1; x < WIDTH-1; x++)
+            switch (getSquareTypeShape(x, y)) {
+                case EMPTY:
+                case FRAME_NO_COLLIDE:
+                    return false;
+            }
+            return true;
+    }
+
+    private void emptyLine(int y) {
+        for (int x = 1; x < WIDTH-1; x++) {
+            setSquareType(x, y, SquareType.Shape.EMPTY);
+        }
+    }
+
+    private void dropLine(int y, int amount) {
+        for (int x = 1; x < WIDTH-1; x++) {
+            setSquareType(x, y-amount, getSquareTypeShape(x, y));
+        }
+        emptyLine(y);
+    }
+
     private void placePoly() {
         for (int x = 0; x < fallingPoly.getDimension().x; x++) {
             for (int y = 0; y < fallingPoly.getDimension().y; y++) {
@@ -105,7 +146,6 @@ public class Board {
                     SquareType.Shape shape = getSquareTypeShape(getFallingPolyPos().x + x,
                                                                 getFallingPolyPos().y + y - 1);
                     if (shape != SquareType.Shape.EMPTY && shape != SquareType.Shape.FRAME_NO_COLLIDE) {
-                        System.out.println(shape.toString());
                         return false;
                     }
                 }
@@ -121,7 +161,6 @@ public class Board {
                     SquareType.Shape shape = getSquareTypeShape(getFallingPolyPos().x + x,
                                                                 getFallingPolyPos().y + y);
                     if (shape != SquareType.Shape.EMPTY && shape != SquareType.Shape.FRAME_NO_COLLIDE) {
-                        System.out.println(shape.toString());
                         return false;
                     }
                 }
@@ -157,7 +196,7 @@ public class Board {
     }
 
     private void newFallingPoly() {
-        fallingPoly = tetroMaker.getRandomPoly();
+        fallingPoly = tetroMaker.getPoly(0);
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
         fallingPolyPos.y = this.HEIGHT-1;
 
