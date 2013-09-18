@@ -55,20 +55,35 @@ public class Board {
     }
 
     private void clearLines() {
-        int[] lines = new int[fallingPoly.getDimension().y];
+        //int[] lines = new int[fallingPoly.getDimension().y];
+        int lines = 0;
         for (int y = 0; y < fallingPoly.getDimension().y; y++) {
             for (int x = 0; x < this.WIDTH; x++) {
                 if (getSquareTypeShape(x, getFallingPolyPos().y + y) == SquareType.Shape.EMPTY)
                     break;
                 if (x == this.WIDTH - 1) {
-                    lines[y] = y + getFallingPolyPos().y;
-                    for (int i = 1; i < this.WIDTH - 1; i++) {
-                        setSquareType(i, getFallingPolyPos().y + y, SquareType.Shape.EMPTY);
+                    //lines[y] = y + getFallingPolyPos().y;
+                    lines++;
+                    for (int x2 = 1; x2 < this.WIDTH - 1; x2++) {
+                        setSquareType(x2, getFallingPolyPos().y + y, SquareType.Shape.EMPTY);
                     }
                 }
             }
         }
-
+        if (lines > 0) {
+            for (int y = 0; y < fallingPoly.getDimension().y; y++) {
+                for (int x = 1; x < (this.WIDTH - 1); x++) {
+                    if (getSquareTypeShape(x, getFallingPolyPos().y + y) != SquareType.Shape.EMPTY) {
+                        for (int x2 = 1; x2 < (this.WIDTH -1); x2++) {
+                            SquareType.Shape temp = getSquareTypeShape(x2, y + fallingPolyPos.y);
+                            setSquareType(x2, y + fallingPolyPos.y, getSquareTypeShape(x2, y + fallingPolyPos.y - lines));
+                            setSquareType(x2, y + fallingPolyPos.y - lines, temp);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void placePoly() {
