@@ -142,7 +142,7 @@ public class Board {
             for (int y = 0; y < this.HEIGHT; y++) {
                 // check if outer most block
                 if ((x == 0 || y == 0) || (x == this.WIDTH-1 || y == this.HEIGHT-1)) {
-                    if (y == this.HEIGHT-1)
+                    if (y == this.HEIGHT-1 && (x > 0 && x < this.WIDTH-1))
                         grid[x][y] = new SquareType(SquareType.Shape.FRAME_NO_COLLIDE);
                     else
                         grid[x][y] = new SquareType(SquareType.Shape.FRAME);
@@ -159,7 +159,7 @@ public class Board {
     private void newFallingPoly() {
         fallingPoly = tetroMaker.getRandomPoly();
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
-        fallingPolyPos.y = this.HEIGHT-fallingPoly.getDimension().y;
+        fallingPolyPos.y = this.HEIGHT-1;
 
         if (!canFall()) {
             this.gameOver = true;
@@ -178,6 +178,8 @@ public class Board {
     }
 
     public SquareType.Shape getSquareTypeShape(int x, int y) {
+        if (x < 0 || x > this.WIDTH-1 || y < 0 || y > this.HEIGHT-1)
+            return SquareType.Shape.EMPTY;
         return grid[x][y].getShape();
     }
 
@@ -188,7 +190,8 @@ public class Board {
         if (getSquareTypeShape(x, y) == SquareType.Shape.FRAME)
             throw new IllegalArgumentException("You are not allowed to replace walls.");
 
-        grid[x][y].setShape(shape);
+        if (x >= 0 && x <= this.WIDTH-1 && y >= 0 && y <= this.HEIGHT-1)
+            grid[x][y].setShape(shape);
     }
 
     public void addBoardListener(BoardListener bl) {
