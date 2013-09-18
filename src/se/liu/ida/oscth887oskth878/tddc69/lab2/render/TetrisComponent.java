@@ -5,6 +5,7 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.SquareType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -88,5 +89,17 @@ public class TetrisComponent extends JComponent {
             default:
                 return Color.PINK;
         }
+    }
+
+    public void moveLeft() {
+        board.moveLeft();
+    }
+
+    public void moveRight() {
+        board.moveRight();
+    }
+
+    public void rotate() {
+        board.getFallingPoly().rotate(true);
     }
 }

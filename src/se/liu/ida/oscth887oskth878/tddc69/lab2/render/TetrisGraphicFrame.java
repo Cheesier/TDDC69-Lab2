@@ -5,6 +5,7 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.BoardListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +28,35 @@ public class TetrisGraphicFrame extends JFrame implements BoardListener{
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("UP"),
+                "rotate");
+        tetrisComponent.getActionMap().put("rotate",
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        tetrisComponent.rotate();
+                    }
+                });
+
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),
+                "moveLeft");
+        tetrisComponent.getActionMap().put("moveLeft",
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        tetrisComponent.moveLeft();
+                    }
+                });
+
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"),
+                "moveRight");
+        tetrisComponent.getActionMap().put("moveRight",
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        tetrisComponent.moveRight();
+                    }
+                });
     }
 
     @Override
