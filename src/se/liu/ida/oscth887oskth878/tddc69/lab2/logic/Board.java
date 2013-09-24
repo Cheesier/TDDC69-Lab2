@@ -20,15 +20,15 @@ public class Board {
     private TetrominoMaker tetroMaker = new TetrominoMaker(TetrominoBlueprints.blueprints);
     private ArrayList<BoardListener> boardListeners = new ArrayList<BoardListener>();
     private boolean gameOver = false;
+    public final int BORDER_SIZE = 1;
 
     public Board() {
         this(10, 20);
     }
 
     public Board(int WIDTH, int HEIGHT) {
-        int boarderWidth = 1;
-        this.WIDTH = WIDTH + boarderWidth * 2; // add the extra blocks to each side
-        this.HEIGHT = HEIGHT + boarderWidth * 2;
+        this.WIDTH = WIDTH + BORDER_SIZE * 2; // add the extra blocks to each side
+        this.HEIGHT = HEIGHT + BORDER_SIZE * 2;
         this.grid = new SquareType[this.WIDTH][this.HEIGHT];
 
         initBoard();
@@ -57,7 +57,7 @@ public class Board {
     private void clearLines() {
         for (int y = fallingPolyPos.y; y < fallingPolyPos.y + fallingPoly.getDimension().y; y++) {
             if (isLineFull(y)) {
-                for (int y2 = y; y2 < this.HEIGHT-2; y2++) {
+                for (int y2 = y; y2 < this.HEIGHT-1-BORDER_SIZE; y2++) {
                     dropLine(y2+1, 1);
                 }
                 y--;
@@ -66,14 +66,14 @@ public class Board {
     }
 
     private boolean isLineEmpty(int y) {
-        for (int x = 1; x < WIDTH-1; x++)
+        for (int x = BORDER_SIZE; x < WIDTH-BORDER_SIZE; x++)
             if (getSquareTypeShape(x, y) != SquareType.Shape.EMPTY)
                 return true;
         return false;
     }
 
     private boolean isLineFull(int y) {
-        for (int x = 1; x < WIDTH-1; x++)
+        for (int x = BORDER_SIZE; x < WIDTH- BORDER_SIZE; x++)
             switch (getSquareTypeShape(x, y)) {
                 case EMPTY:
                 case FRAME_NO_COLLIDE:
@@ -83,13 +83,13 @@ public class Board {
     }
 
     private void emptyLine(int y) {
-        for (int x = 1; x < WIDTH-1; x++) {
+        for (int x = BORDER_SIZE; x < WIDTH- BORDER_SIZE; x++) {
             setSquareType(x, y, SquareType.Shape.EMPTY);
         }
     }
 
     private void dropLine(int y, int amount) {
-        for (int x = 1; x < WIDTH-1; x++) {
+        for (int x = BORDER_SIZE; x < WIDTH- BORDER_SIZE; x++) {
             setSquareType(x, y-amount, getSquareTypeShape(x, y));
         }
         emptyLine(y);
@@ -109,6 +109,7 @@ public class Board {
     }
 
     private boolean canFall() {
+        // for all SquareTypes in poly, check board one level beneath
         for (int x = 0; x < fallingPoly.getDimension().x; x++) {
             for (int y = 0; y < fallingPoly.getDimension().y; y++) {
                 if (fallingPoly.getSquare(x, y) != null) {
@@ -144,8 +145,8 @@ public class Board {
         for (int x = 0; x < this.WIDTH; x++) {
             for (int y = 0; y < this.HEIGHT; y++) {
                 // check if outer most block
-                if ((x == 0 || y == 0) || (x == this.WIDTH-1 || y == this.HEIGHT-1)) {
-                    if (y == this.HEIGHT-1 && (x > 0 && x < this.WIDTH-1))
+                if ((x == 0 || y == 0) || (x == this.WIDTH - 1 || y == this.HEIGHT - 1)) {
+                    if (y == this.HEIGHT - 1 && (x > 0 && x < this.WIDTH - 1))
                         grid[x][y] = new SquareType(SquareType.Shape.FRAME_NO_COLLIDE);
                     else
                         grid[x][y] = new SquareType(SquareType.Shape.FRAME);
@@ -163,7 +164,7 @@ public class Board {
     private void newFallingPoly() {
         fallingPoly = tetroMaker.getRandomPoly();
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
-        fallingPolyPos.y = this.HEIGHT-1;
+        fallingPolyPos.y = this.HEIGHT-BORDER_SIZE;
 
         if (!canFall()) {
             this.gameOver = true;
@@ -182,7 +183,7 @@ public class Board {
     }
 
     public SquareType.Shape getSquareTypeShape(int x, int y) {
-        if (x < 0 || x > this.WIDTH-1 || y < 0 || y > this.HEIGHT-1)
+        if (x < 0 || x > this.WIDTH - 1 || y < 0 || y > this.HEIGHT - 1)
             return SquareType.Shape.EMPTY;
         return grid[x][y].getShape();
     }
@@ -208,6 +209,9 @@ public class Board {
     }
 
     public void move(int amount) {
+        if (gameOver)
+            return;
+
         fallingPolyPos.x += amount;
         if (!isValidPlacement())
             fallingPolyPos.x -= amount;
@@ -215,6 +219,9 @@ public class Board {
     }
 
     public void rotate (boolean clockwise) {
+        if (gameOver)
+            return;
+
         fallingPoly.rotate(clockwise);
         if (!isValidPlacement())
             fallingPoly.rotate(false);

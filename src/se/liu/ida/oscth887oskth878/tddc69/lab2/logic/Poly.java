@@ -76,8 +76,7 @@ public class Poly {
                     y++;
                     break;
                 default:
-                    System.err.println("Found invalid sign '" + pattern.charAt(i) + "' while parsing Poly.");
-                    break;
+                    throw new RuntimeException("Found invalid sign '" + pattern.charAt(i) + "' while parsing Poly.");
             }
         }
 
