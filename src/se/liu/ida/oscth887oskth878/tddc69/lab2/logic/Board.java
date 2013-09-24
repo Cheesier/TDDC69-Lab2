@@ -3,7 +3,6 @@ package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 import se.liu.ida.oscth887oskth878.tddc69.lab2.math.Vec2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,7 +40,7 @@ public class Board {
             return;
 
         updatePolyPos();
-        notifyListners();
+        notifyListeners();
     }
 
     private void updatePolyPos() {
@@ -54,6 +53,7 @@ public class Board {
         }
     }
 
+    // Removes, if needed, the lines that are full
     private void clearLines() {
         for (int y = fallingPolyPos.y; y < fallingPolyPos.y + fallingPoly.getDimension().y; y++) {
             if (isLineFull(y)) {
@@ -95,6 +95,7 @@ public class Board {
         emptyLine(y);
     }
 
+    // Break down a poly to SquareTypes and put on board
     private void placePoly() {
         for (int x = 0; x < fallingPoly.getDimension().x; x++) {
             for (int y = 0; y < fallingPoly.getDimension().y; y++) {
@@ -138,6 +139,7 @@ public class Board {
 
     }
 
+    // Initialize the board with a FRAME around the entire board and fill the other parts with EMPTY
     private void initBoard() {
         for (int x = 0; x < this.WIDTH; x++) {
             for (int y = 0; y < this.HEIGHT; y++) {
@@ -157,6 +159,7 @@ public class Board {
         newFallingPoly();
     }
 
+    // generate a new Poly
     private void newFallingPoly() {
         fallingPoly = tetroMaker.getRandomPoly();
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);
@@ -167,7 +170,7 @@ public class Board {
             System.out.println("Game over");
         }
 
-        notifyListners();
+        notifyListeners();
     }
 
     public Poly getFallingPoly() {
@@ -199,23 +202,23 @@ public class Board {
         boardListeners.add(bl);
     }
 
-    private void notifyListners() {
+    private void notifyListeners() {
         for (int i = 0; i < boardListeners.size(); i++)
             boardListeners.get(i).boardChanged();
     }
 
-    public void move(int anmount) {
-        fallingPolyPos.x += anmount;
+    public void move(int amount) {
+        fallingPolyPos.x += amount;
         if (!isValidPlacement())
-            fallingPolyPos.x -= anmount;
-        notifyListners();
+            fallingPolyPos.x -= amount;
+        notifyListeners();
     }
 
-    public void rotate (boolean clocwise) {
-        fallingPoly.rotate(true);
+    public void rotate (boolean clockwise) {
+        fallingPoly.rotate(clockwise);
         if (!isValidPlacement())
             fallingPoly.rotate(false);
-        notifyListners();
+        notifyListeners();
     }
 
 }
