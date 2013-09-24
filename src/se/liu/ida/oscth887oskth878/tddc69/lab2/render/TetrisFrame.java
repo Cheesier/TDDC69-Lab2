@@ -7,11 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created with IntelliJ IDEA.
- * User: ostenip
- * Date: 9/16/13
- * Time: 7:01 PM
- * To change this template use File | Settings | File Templates.
+ * @author: Oscar Thunberg <oscth887>
+ * @author: Oskar Therén <oskth878>
+ * @version 1.0
+ * @since: 16/09/13
  */
 public class TetrisFrame extends JFrame {
     JTextArea area;

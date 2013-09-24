@@ -9,11 +9,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created with IntelliJ IDEA.
- * User: ostenip
- * Date: 9/9/13
- * Time: 6:14 PM
- * To change this template use File | Settings | File Templates.
+ * @author: Oscar Thunberg <oscth887>
+ * @author: Oskar Therén <oskth878>
+ * @version 1.0
+ * @since: 09/09/13
  */
 public class BoardTest {
     static Board board;

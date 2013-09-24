@@ -9,14 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Oskar
- * Date: 2013-09-17
- * Time: 19:33
- * To change this template use File | Settings | File Templates.
+ * @author: Oskar Therén <oskth878>
+ * @author: Oscar Thunberg <oscth887>
+ * @version 1.0
+ * @since: 17/09/13
  */
-
-
 public class TetrisComponent extends JComponent {
     private Board board;
     private static final int SQUARE_SIZE = 26;

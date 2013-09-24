@@ -8,11 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Oskar
- * Date: 2013-09-17
- * Time: 20:38
- * To change this template use File | Settings | File Templates.
+ * @author: Oskar Therén <oskth878>
+ * @author: Oscar Thunberg <oscth887>
+ * @version 1.0
+ * @since: 09/17/13
  */
 public class TetrisGraphicFrame extends JFrame implements BoardListener{
     private TetrisComponent tetrisComponent;

@@ -1,13 +1,11 @@
 package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
 /**
- * Created with IntelliJ IDEA.
- * User: ostenip
- * Date: 9/9/13
- * Time: 4:31 PM
- * To change this template use File | Settings | File Templates.
+ * @author: Oscar Thunberg <oscth887>
+ * @author: Oskar Therén <oskth878>
+ * @version 1.0
+ * @since: 09/09/13
  */
-
 public class SquareType {
     public enum Shape {
         I, O, T, S, Z, J, L, EMPTY, FRAME, FRAME_NO_COLLIDE

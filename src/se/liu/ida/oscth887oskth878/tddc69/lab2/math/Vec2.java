@@ -1,11 +1,10 @@
 package se.liu.ida.oscth887oskth878.tddc69.lab2.math;
 
 /**
- * Created with IntelliJ IDEA.
- * User: ostenip
- * Date: 9/10/13
- * Time: 5:53 PM
- * To change this template use File | Settings | File Templates.
+ * @author: Oscar Thunberg <oscth887>
+ * @author: Oskar Therén <oskth878>
+ * @version 1.0
+ * @since: 10/09/13
  */
 public class Vec2 {
     public int x, y;

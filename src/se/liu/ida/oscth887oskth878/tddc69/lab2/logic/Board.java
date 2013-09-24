@@ -5,11 +5,10 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.math.Vec2;
 import java.util.ArrayList;
 
 /**
- * Created with IntelliJ IDEA.
- * User: ostenip
- * Date: 9/9/13
- * Time: 4:31 PM
- * To change this template use File | Settings | File Templates.
+ * @author: Oscar Thunberg <oscth887>
+ * @author: Oskar Therén <oskth878>
+ * @version 1.0
+ * @since: 09/09/13
  */
 public class Board {
     public final int WIDTH, HEIGHT;
@@ -32,7 +31,6 @@ public class Board {
         this.grid = new SquareType[this.WIDTH][this.HEIGHT];
 
         initBoard();
-        System.out.println("Created a new board: " + this.WIDTH + ", " + this.HEIGHT);
     }
 
     public void tick() {
@@ -160,7 +158,7 @@ public class Board {
         newFallingPoly();
     }
 
-    // generate a new Poly
+    // generate a new random Poly
     private void newFallingPoly() {
         fallingPoly = tetroMaker.getRandomPoly();
         fallingPolyPos.x = (this.WIDTH / 2) - (fallingPoly.getDimension().x / 2);

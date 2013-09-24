@@ -1,11 +1,10 @@
 package se.liu.ida.oscth887oskth878.tddc69.lab2.logic;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Oskar
- * Date: 2013-09-18
- * Time: 13:14
- * To change this template use File | Settings | File Templates.
+ * @author: Oskar Therén <oskth878>
+ * @author: Oscar Thunberg <oscth887>
+ * @version 1.0
+ * @since: 18/09/13
  */
 public interface BoardListener {
     public void boardChanged();
