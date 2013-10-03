@@ -17,12 +17,15 @@ import java.awt.event.ActionEvent;
 public class BoardTest {
     static Board board;
     static TetrisGraphicFrame window;
+    static Timer clockTimer;
 
     static final Action doOneStep = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            board.tick();
-            //window.draw(board);
+            if (!board.tick()) {
+                TetrisGraphicFrame.gameOver();
+                clockTimer.stop();
+            }
         }
     };
 
@@ -31,7 +34,7 @@ public class BoardTest {
         window = new TetrisGraphicFrame(board);
         board.addBoardListener(window);
 
-        final Timer clockTimer = new Timer(200, doOneStep);
+        clockTimer = new Timer(200, doOneStep);
         clockTimer.setCoalesce(true);
         clockTimer.start();
 

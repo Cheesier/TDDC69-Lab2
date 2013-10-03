@@ -94,4 +94,12 @@ public class TetrisGraphicFrame extends JFrame implements BoardListener{
     public void boardChanged() {
         repaint();
     }
+
+    public static void gameOver() {
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Would you like to exit the game?","Game Over",dialogButton);
+        if(dialogResult == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }
 }

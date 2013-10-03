@@ -5,8 +5,6 @@ import se.liu.ida.oscth887oskth878.tddc69.lab2.logic.SquareType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.geom.Rectangle2D;
 
 /**
  * @author: Oskar Therén <oskth878>
@@ -89,15 +87,15 @@ public class TetrisComponent extends JComponent {
     }
 
     public void moveLeft() {
-        board.move(-1);
+        board.movePoly(-1);
     }
 
     public void moveRight() {
-        board.move(1);
+        board.movePoly(1);
     }
 
     public void rotate(boolean clockwise) {
-        board.rotate(clockwise);
+        board.rotatePoly(clockwise);
     }
 
     public void moveDown() {

@@ -14,7 +14,6 @@ public class Board {
     public final int WIDTH, HEIGHT;
     private SquareType[][] grid;
     private Poly fallingPoly = null;
-    private int fallingX, fallingY;
     private Vec2 fallingPolyPos = new Vec2();
     private TetrominoMaker tetroMaker = new TetrominoMaker(TetrominoBlueprints.blueprints);
     private ArrayList<BoardListener> boardListeners = new ArrayList<BoardListener>();
@@ -33,12 +32,13 @@ public class Board {
         initBoard();
     }
 
-    public void tick() {
+    public boolean tick() {
         if (gameOver)
-            return;
+            return false;
 
         updatePolyPos();
         notifyListeners();
+        return true;
     }
 
     private void updatePolyPos() {
@@ -206,7 +206,7 @@ public class Board {
             boardListeners.get(i).boardChanged();
     }
 
-    public void move(int amount) {
+    public void movePoly(int amount) {
         if (gameOver)
             return;
 
@@ -216,13 +216,13 @@ public class Board {
         notifyListeners();
     }
 
-    public void rotate (boolean clockwise) {
+    public void rotatePoly(boolean clockwise) {
         if (gameOver)
             return;
 
         fallingPoly.rotate(clockwise);
         if (!isValidPlacement())
-            fallingPoly.rotate(false);
+            fallingPoly.rotate(!clockwise);
         notifyListeners();
     }
 
