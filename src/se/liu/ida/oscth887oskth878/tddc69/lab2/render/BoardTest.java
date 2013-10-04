@@ -9,10 +9,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * @author: Oscar Thunberg <oscth887>
- * @author: Oskar Therén <oskth878>
+ * @author Oscar Thunberg <oscth887>
+ * @author Oskar Therén <oskth878>
  * @version 1.0
- * @since: 09/09/13
+ * @since 09/09/13
  */
 public class BoardTest {
     static Board board;

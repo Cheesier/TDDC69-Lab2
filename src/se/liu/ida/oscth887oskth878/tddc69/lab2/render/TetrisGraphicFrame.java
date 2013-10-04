@@ -8,10 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * @author: Oskar Therén <oskth878>
- * @author: Oscar Thunberg <oscth887>
+ * @author Oskar Therén <oskth878>
+ * @author Oscar Thunberg <oscth887>
  * @version 1.0
- * @since: 09/17/13
+ * @since 09/17/13
  */
 public class TetrisGraphicFrame extends JFrame implements BoardListener{
     private TetrisComponent tetrisComponent;

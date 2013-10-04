@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author: Oskar Therén <oskth878>
- * @author: Oscar Thunberg <oscth887>
+ * @author Oskar Therén <oskth878>
+ * @author Oscar Thunberg <oscth887>
  * @version 1.0
- * @since: 17/09/13
+ * @since 17/09/13
  */
 public class TetrisComponent extends JComponent {
     private Board board;
